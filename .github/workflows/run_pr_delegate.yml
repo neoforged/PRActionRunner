@@ -1,0 +1,40 @@
+on:
+    workflow_call:
+        inputs:
+            repository:
+                required: true
+                type: string
+                description: The repository to run for
+            pr:
+                required: true
+                type: number
+                description: The PR number
+            command:
+                required: true
+                type: string
+                description: The command to run
+            upload:
+                required: true
+                type: string
+                description: The file pattern to upload
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                repository: ${{ inputs.repository }}
+                ref: pr/${{ inputs.pr }}
+                fetch-depth: 1000
+                fetch-tags: true
+            - name: Setup Gradle
+              uses: gradle/actions/setup-gradle@v4
+              with:
+                  cache-read-only: false
+            - name: Run task
+              run: ${{ inputs.command }}
+            - uses: actions/upload-artifact@v4
+              with:
+                path: ${{ inputs.upload }}

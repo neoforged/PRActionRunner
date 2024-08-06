@@ -1,0 +1,30 @@
+name: Run PR
+
+on:
+    workflow_dispatch:
+        inputs:
+            repository:
+                required: true
+                type: string
+                description: The repository to run for
+            pr:
+                required: true
+                type: number
+                description: The PR number
+            command:
+                required: true
+                type: string
+                description: The command to run
+            upload:
+                required: true
+                type: string
+                description: The file pattern to upload
+
+jobs:
+    run:
+        uses: neoforged/practionrunner/.github/workflows/run_pr_delegate.yml@main
+        with:
+            repository: ${{ inputs.repository }}
+            pr: ${{ inputs.pr }}
+            command: ${{ inputs.command }}
+            upload: ${{ inputs.upload }}
