@@ -23,12 +23,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                repository: ${{ inputs.repository }}
-                ref: pull/${{ inputs.pr }}/head
-                fetch-depth: 1000
-                fetch-tags: true
+              run: |
+                git init
+                git remote add origin https://github.com/${{ inputs.repository }}.git
+                git fetch origin pull/${{ inputs.pr }}/head:pr-${{ inputs.pr }} --tags
+                git checkout pr-${{ inputs.pr }}
             - name: Setup Gradle
               uses: gradle/actions/setup-gradle@v4
               with:
