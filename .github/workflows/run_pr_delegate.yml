@@ -7,6 +7,7 @@ on:
                 description: The repository to run for
             pr:
                 required: true
+                type: string
                 description: The PR number
             command:
                 required: true
