@@ -11,10 +11,14 @@ on:
                 required: true
                 type: number
                 description: The PR number
-            command:
+            command1:
                 required: true
                 type: string
-                description: The command to run
+                description: The first command to run
+            command2:
+                required: true
+                type: string
+                description: The second command to run
             upload:
                 required: true
                 type: string
@@ -26,5 +30,6 @@ jobs:
         with:
             repository: ${{ inputs.repository }}
             pr: ${{ inputs.pr }}
-            command: ${{ inputs.command }}
+            command1: ${{ inputs.command1 }}
+            command2: ${{ inputs.command2 }}
             upload: ${{ inputs.upload }}

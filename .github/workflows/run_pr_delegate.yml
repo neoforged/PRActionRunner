@@ -9,10 +9,14 @@ on:
                 required: true
                 type: string
                 description: The PR number
-            command:
+            command1:
                 required: true
                 type: string
-                description: The command to run
+                description: The first command to run
+            command2:
+                required: true
+                type: string
+                description: The second command to run
             upload:
                 required: true
                 type: string
@@ -32,8 +36,10 @@ jobs:
               uses: gradle/actions/setup-gradle@v4
               with:
                   cache-read-only: false
-            - name: Run task
-              run: ${{ inputs.command }}
+            - name: Run task 1
+              run: ${{ inputs.command1 }}
+            - name: Run task 2
+              run: ${{ inputs.command2 }}
             - uses: actions/upload-artifact@v4
               with:
                 path: ${{ inputs.upload }}
