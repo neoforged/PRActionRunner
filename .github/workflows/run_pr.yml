@@ -21,7 +21,7 @@ on:
                 type: string
                 description: The first command to run
             command2:
-                required: true
+                required: false
                 type: string
                 description: The second command to run
             upload:
