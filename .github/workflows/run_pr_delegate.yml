@@ -33,7 +33,7 @@ jobs:
               with:
                   cache-read-only: false
             - name: Run task
-              run: ${{ join(fromJson(inputs.command), '\n') }}
+              run: ${{ inputs.command }}
             - uses: actions/upload-artifact@v4
               with:
                 path: ${{ inputs.upload }}
