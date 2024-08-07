@@ -1,8 +1,13 @@
 name: Run PR
+run-name: ${{ inputs.id }}
 
 on:
     workflow_dispatch:
         inputs:
+            id:
+                required: true
+                type: string
+                description: The run ID
             repository:
                 required: true
                 type: string
