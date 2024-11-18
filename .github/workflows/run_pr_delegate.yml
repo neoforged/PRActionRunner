@@ -41,6 +41,14 @@ jobs:
             - name: Run task 2
               run: ${{ inputs.command2 }}
               if: inputs.command2
+            - name: Run git status
+              run: git status > __git_status.txt
             - uses: actions/upload-artifact@v4
+              name: Upload changes
               with:
                 path: ${{ inputs.upload }}
+            - uses: actions/upload-artifact@v4
+              name: Upload status
+              with:
+                path: __git_status.txt
+                name: status
