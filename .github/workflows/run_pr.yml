@@ -1,40 +1,20 @@
 name: Run PR
-run-name: ${{ inputs.id }}
 
 on:
     workflow_dispatch:
         inputs:
-            id:
+            endpoint:
                 required: true
                 type: string
-                description: The run ID
-            repository:
+                description: WebSocket endpoint
+            os:
                 required: true
                 type: string
-                description: The repository to run for
-            pr:
-                required: true
-                type: number
-                description: The PR number
-            command1:
-                required: true
-                type: string
-                description: The first command to run
-            command2:
-                required: false
-                type: string
-                description: The second command to run
-            upload:
-                required: true
-                type: string
-                description: The file pattern to upload
+                description: The OS to run on
 
 jobs:
     run:
         uses: neoforged/practionrunner/.github/workflows/run_pr_delegate.yml@main
         with:
-            repository: ${{ inputs.repository }}
-            pr: ${{ inputs.pr }}
-            command1: ${{ inputs.command1 }}
-            command2: ${{ inputs.command2 }}
-            upload: ${{ inputs.upload }}
+            endpoint: ${{ inputs.endpoint }}
+            os: ${{ inputs.os }

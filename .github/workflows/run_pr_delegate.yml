@@ -1,54 +1,20 @@
 on:
     workflow_call:
         inputs:
-            repository:
-                required: true
-                type: string
-                description: The repository to run for
-            pr:
-                required: true
-                type: string
-                description: The PR number
-            command1:
-                required: true
-                type: string
-                description: The first command to run
-            command2:
-                required: false
-                type: string
-                description: The second command to run
-            upload:
-                required: true
-                type: string
-                description: The file pattern to upload
+          endpoint:
+            required: true
+            type: string
+            description: WebSocket endpoint
+          os:
+            required: true
+            type: string
+            description: The OS to run on
 
 jobs:
     run:
-        runs-on: ubuntu-latest
+        runs-on: ${{ inputs.os }}
         steps:
-            - name: Checkout
-              run: |
-                git init
-                git remote add origin https://github.com/${{ inputs.repository }}.git
-                git fetch origin pull/${{ inputs.pr }}/head:pr-${{ inputs.pr }} --tags
-                git checkout pr-${{ inputs.pr }}
-            - name: Setup Gradle
-              uses: gradle/actions/setup-gradle@v4
-              with:
-                  cache-read-only: false
-            - name: Run task 1
-              run: ${{ inputs.command1 }}
-            - name: Run task 2
-              run: ${{ inputs.command2 }}
-              if: inputs.command2
-            - name: Run git status
-              run: git status > __git_status.txt
-            - uses: actions/upload-artifact@v4
-              name: Upload changes
-              with:
-                path: ${{ inputs.upload }}
-            - uses: actions/upload-artifact@v4
-              name: Upload status
-              with:
-                path: __git_status.txt
-                name: status
+          - name: Run
+            uses: neoforged/reactionable/action-runner@main
+            with:
+                endpoint: ${{ inputs.endpoint }}
