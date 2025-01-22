@@ -17,4 +17,4 @@ jobs:
         uses: neoforged/practionrunner/.github/workflows/run_pr_delegate.yml@main
         with:
             endpoint: ${{ inputs.endpoint }}
-            os: ${{ inputs.os }
+            os: ${{ inputs.os }}
