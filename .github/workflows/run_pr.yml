@@ -1,4 +1,5 @@
 name: Run PR
+run-name: ${{ inputs.name }}
 
 on:
     workflow_dispatch:
@@ -11,6 +12,11 @@ on:
                 required: true
                 type: string
                 description: The OS to run on
+            name:
+                required: false
+                type: string
+                description: The run name
+                default: Run PR
 
 jobs:
     run:
