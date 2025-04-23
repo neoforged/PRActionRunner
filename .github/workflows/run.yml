@@ -1,0 +1,27 @@
+name: Run runner
+run-name: ${{ inputs.name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      endpoint:
+        required: true
+        type: string
+        description: WebSocket endpoint
+      os:
+        required: true
+        type: string
+        description: The OS to run on
+      name:
+        required: false
+        type: string
+        description: The run name
+        default: Run runner
+
+jobs:
+  run:
+    # We use a delegate action here to make sure that we do not pass in any org secrets
+    uses: neoforged/practionrunner/.github/workflows/run_delegate.yml@main
+    with:
+      endpoint: ${{ inputs.endpoint }}
+      os: ${{ inputs.os }}

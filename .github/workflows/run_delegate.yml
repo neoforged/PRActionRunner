@@ -1,0 +1,22 @@
+on:
+  workflow_call:
+    inputs:
+      endpoint:
+        required: true
+        type: string
+        description: WebSocket endpoint
+      os:
+        required: true
+        type: string
+        description: The OS to run on
+
+jobs:
+  run:
+    runs-on: ${{ inputs.os }}
+    steps:
+      - name: Run
+        uses: neoforged/reactionable/action-runner@main
+        with:
+          endpoint: ${{ inputs.endpoint }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
