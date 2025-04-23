@@ -21,7 +21,7 @@ on:
 jobs:
   run:
     # We use a delegate action here to make sure that we do not pass in any org secrets
-    uses: neoforged/practionrunner/.github/workflows/run_delegate.yml@main
+    uses: neoforged/action-runner/.github/workflows/run_delegate.yml@main
     with:
       endpoint: ${{ inputs.endpoint }}
       os: ${{ inputs.os }}
