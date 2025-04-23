@@ -17,6 +17,6 @@ jobs:
       - name: Run
         uses: neoforged/reactionable/action-runner@main
         with:
-          endpoint: ${{ inputs.endpoint }}
+          endpoint-input: endpoint
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

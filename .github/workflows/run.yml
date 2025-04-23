@@ -19,15 +19,7 @@ on:
         default: Run runner
 
 jobs:
-  censor:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Censor endpoint
-        run: |
-          ENDPOINT=$(jq -r '.inputs.endpoint' $GITHUB_EVENT_PATH)
-          echo ::add-mask::$ENDPOINT
   run:
-    needs: [censor]
     # We use a delegate action here to make sure that we do not pass in any org secrets
     uses: neoforged/action-runner/.github/workflows/run_delegate.yml@main
     with:
